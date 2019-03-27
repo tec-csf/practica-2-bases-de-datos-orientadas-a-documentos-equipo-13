@@ -1,6 +1,6 @@
 require 'mongo'
 
-client = Mongo::Client.new('mongodb+srv://salo:<8988>@cluster0-edumb.mongodb.net/test?retryWrites=true')
+client = Mongo::Client.new([ '0.0.0.0:27017' ], :database => 'tarea', :ssl => false)
 db = client.database
 
-p db
+p db.collections
