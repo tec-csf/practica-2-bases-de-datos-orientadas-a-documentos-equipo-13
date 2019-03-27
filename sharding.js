@@ -96,10 +96,33 @@ Iniciar el Router
     sh.addShard( "rsShard1/mongo-shard11:27018")
 
 
+Para agregar el dataset a los contenedores Docker
 
-
-Copiar dataset al contenedor
+# Copiar dataset al contenedor
     docker cp dispositivos.json mongo-router:/dispositivos.json
     docker cp direcciones.json mongo-router:/direcciones.json
     docker cp usuarios.json mongo-router:/usuarios.json
 
+# Conectarse al *SHELL* del contenedor
+    docker exec -it mongo-router sh
+
+
+# Importar los datasets a la base de datos. Especificando -d (database) y -c (collection)
+    mongoimport -d tarea -c usuarios --file /usuarios.json --jsonArray
+    mongoimport -d tarea -c direccion --file /direcciones.json --jsonArray
+    mongoimport -d tarea -c dispositivos --file /dispositivos.json --jsonArray
+
+
+# Regresar al router con (el prompt con mongos>)
+    docker exec -it mongo-router mongo
+
+# Para habilitar el sharding en la base de datos "tarea"
+    sh.enableSharding("tarea")
+
+# Para hacer sharding de colección con el paramentro especificado
+    sh.shardCollection("tarea.usuarios", { "_id": 1 } )
+    sh.shardCollection("tarea.direccion", { "_id": 1 } )
+    sh.shardCollection("tarea.dispositivos", { "_id": 1 } )
+
+# Para monitorear el estatus del shading
+sh.status()
