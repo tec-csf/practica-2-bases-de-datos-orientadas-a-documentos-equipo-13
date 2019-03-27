@@ -137,3 +137,5 @@ Para agregar el dataset a los contenedores Docker
 # El $count es equivalente a un $group + $project
     db.direccion.aggregate([{$match: {"ubicacion" :"Mexico"}}, {$count: "ubicacion"}])
 
+# Todas las mujeres con direccion_id mayor a 1000 ordenado ascendentemente
+    db.usuarios.aggregate([{$match:{"genero":"female", "direccion_id":{$gte: 1000}}}, {$project:{"nombre":1} }, {$sort: {"_id":1}}])
