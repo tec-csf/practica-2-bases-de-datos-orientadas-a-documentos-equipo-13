@@ -125,4 +125,15 @@ Para agregar el dataset a los contenedores Docker
     sh.shardCollection("tarea.dispositivos", { "_id": 1 } )
 
 # Para monitorear el estatus del shading
-sh.status()
+    sh.status()
+
+
+# Queries
+
+# Para mostrar los países en donde hay dispositivos de la marca Sony
+    db.dispositivos.aggregate([{$match:{"marca":"Sony"}},{$project:{"marca":1,"pais":1, "_id":0}}, {$sort:{"_id":1}}]);
+
+# Regresa la cantidad de dispositivos en México
+# El $count es equivalente a un $group + $project
+    db.direccion.aggregate([{$match: {"ubicacion" :"Mexico"}}, {$count: "ubicacion"}])
+
