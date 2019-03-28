@@ -7,11 +7,11 @@ app = FlaskAPI(__name__)
 
 @app.route("/", methods=['GET'])
 def list():
-    mongo_uri = "mongodb://mongos:27017"
+    mongo_uri = "mongodb://mongo-router:27017"
 
     client = MongoClient(mongo_uri)
-    db = client.notes
-    collection = db.notes
+    db = client.tarea
+    collection = db.usuarios
 
     cursor = collection.find()
 

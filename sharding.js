@@ -87,7 +87,7 @@ rs.initiate(config)
 Iniciar el Router
 
 # Iniciar el router:
-    docker run --name mongo-router -d -p 27017:27017 --net mongo-sh mongo mongos --configdb rsConfig/mongo-config1:27019,mongo-config2:27019,mongo-config3:27019
+    docker run --name mongo-router -d -p 27017:27017 --net mongo-sh mongo mongos --configdb rsConfig/mongo-config1:27019,mongo-config2:27019,mongo-config3:27019  --bind_ip_all
 
 # Conectarse al router:
     docker exec -it mongo-router mongo
