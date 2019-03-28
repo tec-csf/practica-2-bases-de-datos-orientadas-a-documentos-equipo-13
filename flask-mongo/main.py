@@ -33,7 +33,7 @@ def list_dispositivos():
     db = client.tarea
     collection = db.dispositivos
 
-    pipeline = [{$match:{"marca":"Sony"}},{$project:{"marca":1,"pais":1, "_id":0}}, {$sort:{"_id":1}}]
+    pipeline = [{"$match":{"marca":"Sony"}},{"$project":{"marca":1,"pais":1, "_id":0}}, {"$sort":{"_id":1}}]
 
     cursor = collection.aggregate(pipeline)
 
@@ -49,7 +49,7 @@ def list():
     db = client.tarea
     collection = db.direcciones
 
-    pipeline = [{$match: {"ubicacion" :"Mexico"}}, {$count: "ubicacion"}]
+    pipeline = [{"$match": {"ubicacion" :"Mexico"}}, {"$count": "ubicacion"}]
 
     cursor = collection.aggregate(pipeline)
 
@@ -63,7 +63,7 @@ def list():
     db = client.tarea
     collection = db.usuarios
 
-    pipeline = [{$match:{"genero":"female", "direccion_id":{$gte: 1000}}}, {$project:{"nombre":1} }, {$sort: {"_id":1}}]
+    pipeline = [{"$match":{"genero":"female", "direccion_id":{"$gte": 1000}}}, {"$project":{"nombre":1} }, {"$sort": {"_id":1}}]
 
     cursor = collection.aggregate(pipeline)
 
